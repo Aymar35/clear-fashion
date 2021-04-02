@@ -9,37 +9,26 @@ const cheerio = require('cheerio');
 const parse = data => {
   const $ = cheerio.load(data);
 
-  return $('.productList-container .productList')
+  return $('.product-meta')
     .map((i, element) => {
       const name = $(element)
-        .find('.productList-title')
+        .find('.product-title')
         .text()
         .trim();
-        //.replace(/\s/g, ' ');
       const price = parseInt(
         $(element)
-          .find('.productList-price')
+          .find('.product-prices')
           .text()
+          .replace(/Lease for €[0-9]+,[0-9]+/,'')
+          .replace(/buy/i, '')
+          .replace(/\n/g,'')
+          .replace(/€/g,'')
       );
-      const brand = 'dedicatedbrand';
+      const brand = 'mudjeans';
 
       return {brand, name, price};
     })
     .get();
-};
-
-
-function parseHomepage(data) {
-  const $ = cheerio.load(data);
-  return $('.js-cmsModule')
-    .map((i, element) => {
-      var href= $(element)
-        .find('a')
-        .attr('href');
-      href="https://www.dedicatedbrand.com"+href;
-      return {href};
-    })
-    .get()
 };
 
 /**
@@ -47,26 +36,12 @@ function parseHomepage(data) {
  * @param  {[type]}  url
  * @return {Array|null}
  */
-
 module.exports.scrape = async url => {
   const response = await axios(url);
   const {data, status} = response;
 
   if (status >= 200 && status < 300) {
     return parse(data);
-  }
-
-  console.error(status);
-
-  return null;
-};
-
-module.exports.scrapeLinks = async url => {
-  const response = await axios(url);
-  const {data, status} = response;
-
-  if (status >= 200 && status < 300) {
-    return parseHomepage(data);
   }
 
   console.error(status);

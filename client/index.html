@@ -21,6 +21,7 @@
       </div>
       <div id="filters">
         <label for="filters">Filters :</label>
+        <button id="favorite-select">Favorite</button>
         <button id="filter-price">By reasonable price</button>
         <button id="filter-release">By recently released</button>
         <div id="brand">
@@ -31,7 +32,7 @@
       <div id="sort">
         <label for="sort-select">Sort:</label>
         <select name="sort" id="sort-select">
-          <option value="price-asc">Cheaper</option>
+          <option value="price-asc">Cheap</option>
           <option value="price-desc">Expensive</option>
           <option value="date-asc">Recently released</option>
           <option value="date-desc">Anciently released</option>
@@ -46,23 +47,23 @@
       </div>
       <div>
         <span>Number of new products</span>
-        <span>0</span>
+        <span id="nbnNewProducts">0</span>
       </div>
       <div>
         <span>p50 price value</span>
-        <span>0</span>
+        <span id="spanP50">0</span>
       </div>
       <div>
         <span>p90 price value</span>
-        <span>0</span>
+        <span id="spanP50">0</span>
       </div>
       <div>
         <span>p95 price value</span>
-        <span>0</span>
+        <span id="spanP95">0</span>
       </div>
       <div>
         <span>Last released date</span>
-        <span>2020-01-01</span>
+        <span id="spanLastReleased">0</span>
       </div>
     </section>
     <section id="products"></section>
