@@ -39,17 +39,19 @@ const setCurrentProducts = ({result, meta}) => {
  */
 const fetchProducts = async (page = 1, size = 12) => {
   try {
-    const response = await fetch(
+    const response2 = await fetch(
       `https://clear-fashion-api.vercel.app?page=${page}&size=${size}`
     );
 
-    const response1= await fetch(
-      `http://localhost:8092/products/search?limit=5&brand=mudjeans&price=200`
+    const response= await fetch(
+      `http://localhost:8092/products?page=${page}&size=${size}`
     );
 
-    /*const response2 = await fetch(
-      `https://server-dun-psi.vercel.app/products`
+    /*const response = await fetch(
+      `http://localhost:8092/products?page=6&size=12`)
     );*/
+
+    /*const response =  await fetch(`https://server-2jko38mwz-aymar35.vercel.app/`);*/
 
     const body = await response.json();
 

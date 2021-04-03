@@ -66,30 +66,33 @@ app.get('/products', async(request, response) => {
   	let size = parseInt(request.query.size);
   	let debut = parseInt((page-1)*size);
 
-	const res=await db.find({});
+	const result = await db.find({});
+	let prod =[];	
+	try{
 
-	try {
-
-		let prod =[];
-		if(page==null && size==null)
+		if(page==null)
 		{
-			//console.log(res);
-			prod=res;
+			page=1;
 		}
-		else
+		if(size==null)
 		{
-			for(i=debut; i< debut+size;i++){
-
-				if(res[i] != null){
-	 				prod.push(res[i]);
-	 			}
-	 		}
+			size=12;
 		}
 
-		response.send({"page" : true, "meta" : {"currentPage":page, "pageSize":size, "pageCount":prod.length, "count":res.length}, "data": {"result":prod}});
+		for(i=debut; i< debut+size;i++){
+
+			if(result[i] != null){
+ 				prod.push(result[i]);
+ 			}
+ 		}
+
+		response.send({"page" :true,"success" :true, "data" : { "meta" :{"currentPage":page, "pageSize":size, 
+			"pageCount":prod.length, "count":result.length}, "result":prod}});
+		//response.send({'a': prod});
 	}catch(e){
 		response.send(e);
 	}
+
 })
 
 app.listen(PORT);
