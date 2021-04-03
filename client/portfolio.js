@@ -44,7 +44,7 @@ const fetchProducts = async (page = 1, size = 12) => {
     );
 
     const response= await fetch(
-      `http://localhost:8092/products?page=${page}&size=${size}`
+      `https://server-two-chi.vercel.app/products?page=${page}&size=${size}`
     );
 
     /*const response = await fetch(
